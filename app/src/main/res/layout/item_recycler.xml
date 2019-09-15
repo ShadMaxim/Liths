@@ -41,7 +41,7 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="Age" />
+            android:text="@string/age" />
 
         <TextView
             android:id="@+id/textViewAge"
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Weight"
+            android:text="@string/weight"
             android:layout_marginLeft="5dp"
             android:layout_weight="1" />
 
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Growth"
+            android:text="@string/growth"
             android:layout_marginLeft="5dp"
             android:layout_weight="1" />
 

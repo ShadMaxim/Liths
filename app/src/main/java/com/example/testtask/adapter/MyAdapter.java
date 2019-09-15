@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testtask.R;
 import com.example.testtask.repository.Person;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private ArrayList<Person> personList;
+    private List<Person> personList;
 
-    public MyAdapter(ArrayList<Person> personList) {
+    public MyAdapter(List<Person> personList) {
         this.personList = personList;
     }
 
@@ -37,18 +37,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         Person person = personList.get(position);
 
-        holder.id.setText("" + person.id);
+        holder.id.setText(Integer.toString(person.id));
         holder.name.setText(person.name);
-        holder.age.setText("" + person.age);
+        holder.age.setText(Integer.toString(person.age));
         holder.weight.setText(Double.toString(person.weight));
-        holder.growth.setText("" + person.growth);
-
-//        holder.id.setText(personList.get(position).id);
-//        holder.name.setText(personList.get(position).name);
-//        holder.age.setText(personList.get(position).age);
-//        holder.weight.setText(personList.get(position).weight);
-//        holder.growth.setText(personList.get(position).growth);
-
+        holder.growth.setText(Double.toString(person.growth));
     }
 
     @Override
@@ -56,12 +49,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return personList.size();
     }
 
-    public void update(ArrayList<Person> list) {
+    public void update(List<Person> list) {
         personList = list;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView id;
         TextView name;
@@ -70,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView growth;
         LinearLayout linearLayout;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.id =itemView.findViewById(R.id.textViewId);
             this.name =itemView.findViewById(R.id.textViewName);

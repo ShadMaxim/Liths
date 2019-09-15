@@ -1,7 +1,5 @@
 package com.example.testtask.repository;
 
-import java.util.ArrayList;
-
 public class Person {
 
     public int id;
@@ -9,8 +7,6 @@ public class Person {
     public int age;
     public int weight;
     public int growth;
-
-    private ArrayList<Person> personList = new ArrayList<>();
 
     public Person(int id, String name, int age, int weight, int growth) {
         this.id = id;
@@ -20,23 +16,23 @@ public class Person {
         this.growth = growth;
     }
 
-    public int getId() {
+    public String getName() {
+        return name;
+    }
+
+    /*public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    /*public void setName(String name) {
         this.name = name;
-    }
+    }*/
 
-    public int getAge() {
+    /*public int getAge() {
         return age;
     }
 
@@ -58,5 +54,5 @@ public class Person {
 
     public void setGrowth(int growth) {
         this.growth = growth;
-    }
+    }*/
 }

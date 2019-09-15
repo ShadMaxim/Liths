@@ -1,25 +1,17 @@
-package com.example.testtask.repository;
+package com.example.testtask.test;
+
+import com.example.testtask.repository.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonRepository {
+public class Qwerty {
 
-    private static List<Person> personList;
+    static List<Person> personList = new ArrayList<>();
+    static String name = "a";
 
-    public static List<Person> listPerson() {
+    public static void main(String[] args) {
 
-        if (personList == null) {
-            personList = new ArrayList<>();
-            createListPerson();
-        }
-        return personList;
-    }
-
-    private PersonRepository() {
-    }
-
-    private static void createListPerson() {
         personList.add(new Person(1, "Sam", 20, 151, 52));
         personList.add(new Person(2, "Max", 24, 184, 71));
         personList.add(new Person(3, "Petr", 29, 170, 66));
@@ -30,5 +22,22 @@ public class PersonRepository {
         personList.add(new Person(8, "Den", 55, 195, 81));
         personList.add(new Person(9, "Ivan", 44, 191, 92));
         personList.add(new Person(10, "Mat", 29, 187, 77));
+
+        search(name);
+
+    }
+
+    static void search(String name){
+
+        List<Person> newListPerson = new ArrayList<>();
+
+        for (Person p : personList){
+            if (p.getName() != null && p.getName().contains(name)){
+                newListPerson.add(p);
+            }
+        }
+
+        System.out.println(newListPerson.toString());
+        System.out.println(newListPerson.size());
     }
 }
