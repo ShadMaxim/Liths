@@ -19,40 +19,4 @@ public class Person {
     public String getName() {
         return name;
     }
-
-    /*public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }*/
-
-    /*public void setName(String name) {
-        this.name = name;
-    }*/
-
-    /*public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public int getGrowth() {
-        return growth;
-    }
-
-    public void setGrowth(int growth) {
-        this.growth = growth;
-    }*/
 }

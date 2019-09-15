@@ -1,12 +1,10 @@
 package com.example.testtask.activity;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,9 +24,8 @@ public class StartActivity extends AppCompatActivity implements View {
     MyAdapter adapter;
     Button sortButton;
     EditText searchByCharName;
-    String search;
+    // String search;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +54,11 @@ public class StartActivity extends AppCompatActivity implements View {
 
             }
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onTextChanged(CharSequence charName, int i, int i1, int i2) {
 
-                search = charName.toString();
-                presenter.searchUsers(search);
-
+                // search = charName.toString();
+                presenter.searchUsers(charName.toString());
             }
 
             @Override
