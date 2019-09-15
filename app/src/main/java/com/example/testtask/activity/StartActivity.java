@@ -24,7 +24,6 @@ public class StartActivity extends AppCompatActivity implements View {
     MyAdapter adapter;
     Button sortButton;
     EditText searchByCharName;
-    // String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,6 @@ public class StartActivity extends AppCompatActivity implements View {
             @Override
             public void onTextChanged(CharSequence charName, int i, int i1, int i2) {
 
-                // search = charName.toString();
                 presenter.searchUsers(charName.toString());
             }
 
