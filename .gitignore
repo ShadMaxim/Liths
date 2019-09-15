@@ -11,15 +11,3 @@ build/
 .gradle/
 
 
-gradlew
-.gradlew
-
-/.idea/workspace.xml
-.idea/workspace.xml
-
-gradlew.properties
-/gradlew.properties
-/gradlew.bat
-/settings.gradle
-/app/build.proguard-rules.pro
-app/build.proguard-rules.pro
