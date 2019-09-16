@@ -14,8 +14,8 @@ import android.widget.EditText;
 import com.example.testtask.R;
 import com.example.testtask.adapter.MyAdapter;
 import com.example.testtask.repository.Person;
-import com.example.testtask.repository.PersonRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 public class StartActivity extends AppCompatActivity implements View {
@@ -37,7 +37,9 @@ public class StartActivity extends AppCompatActivity implements View {
         searchByCharName = findViewById(R.id.searchByCharName);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        adapter = new MyAdapter(PersonRepository.listPerson());
+        adapter = new MyAdapter(Collections.emptyList());
+
+        presenter.loadList();
 
         DividerItemDecoration decor = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
@@ -67,7 +69,6 @@ public class StartActivity extends AppCompatActivity implements View {
 
         sortButton.setOnClickListener(view ->
                 presenter.sortList());
-
     }
 
     @Override
