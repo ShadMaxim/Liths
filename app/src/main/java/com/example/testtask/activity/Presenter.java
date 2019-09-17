@@ -1,15 +1,23 @@
 package com.example.testtask.activity;
 
 import android.annotation.SuppressLint;
+import com.example.testtask.app.App;
+import com.example.testtask.dao.PersonDao;
 import com.example.testtask.repository.Person;
 import com.example.testtask.repository.PersonRepository;
 import java.util.List;
+import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 class Presenter {
 
     private View view;
+    private PersonDao personDao;
+
+    {
+        personDao = App.instance.getDatabase().PersonDao();
+    }
 
     void setView(View view) {
         this.view = view;
@@ -17,6 +25,21 @@ class Presenter {
 
     void detachView() {
         this.view = null;
+    }
+
+    void loadList() {
+
+        Completable.fromAction(() -> {
+            List<Person> repository = PersonRepository.listPerson();
+            personDao.insertPersonsList(repository);
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe();
+
+        personDao.getPersonList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(list -> view.showList(list));
     }
 
     @SuppressLint("CheckResult")
