@@ -15,9 +15,6 @@ import io.reactivex.Maybe;
 @Dao
 public interface PersonDao {
 
-    /*@Query("SELECT * FROM PERSON_TABLE")
-    List<Person> getPersonList();*/
-
     @Query("SELECT * FROM PERSON_TABLE")
     Maybe<List<Person>> getPersonList();
 
