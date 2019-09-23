@@ -1,30 +1,36 @@
 package com.example.testtask.activity;
 
 import android.annotation.SuppressLint;
+
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.example.testtask.app.App;
 import com.example.testtask.dao.PersonDao;
 import com.example.testtask.repository.Person;
 import com.example.testtask.repository.PersonRepository;
 import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-class Presenter {
+@InjectViewState
+public class Presenter extends MvpPresenter<MyView> {
 
-    private View view;
     private PersonDao personDao;
+
+    public Presenter() {
+        //getViewState().showList(PersonRepository.listPerson());
+    }
+
+    @Override
+    protected void onFirstViewAttach() {
+        getViewState().showToast("onFirstViewAttach() witch getViewState()");
+        super.onFirstViewAttach();
+    }
 
     {
         personDao = App.instance.getDatabase().PersonDao();
-    }
-
-    void setView(View view) {
-        this.view = view;
-    }
-
-    void detachView() {
-        this.view = null;
     }
 
     void loadList() {
@@ -39,13 +45,16 @@ class Presenter {
         personDao.getPersonList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(list -> view.showList(list));
+                .subscribe(list -> {
+                    getViewState().showList(list);
+                });
     }
 
     @SuppressLint("CheckResult")
     void sortList() {
 
         List<Person> repository = PersonRepository.listPerson();
+        getViewState().showToast(" sort()  with getViewState()");
 
         io.reactivex.Observable
                 .just(repository)
@@ -58,11 +67,16 @@ class Presenter {
                     else if ((person.name.compareTo(t1.name)) > 0) return 1;
                     else return -1;
                 })
-                .subscribe(list -> view.showList(list));
+                .subscribe(list -> {
+                    //getViewState().clearEditText();
+                    getViewState().showList(list);
+                });
     }
 
     @SuppressLint("CheckResult")
     void searchUsers(String name) {
+
+        getViewState().showToast(" searchUsers()  with getViewState()");
 
         List<Person> repository = PersonRepository.listPerson();
 
@@ -72,6 +86,8 @@ class Presenter {
                 .subscribeOn(Schedulers.computation())
                 .filter(person -> person.getName().contains(name))
                 .toList()
-                .subscribe(list -> view.showList(list));
+                .subscribe(list -> {
+                    getViewState().showList(list);
+                });
     }
 }

@@ -1,6 +1,5 @@
 package com.example.testtask.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +9,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.testtask.R;
 import com.example.testtask.adapter.MyAdapter;
 import com.example.testtask.repository.Person;
@@ -18,9 +20,11 @@ import com.example.testtask.repository.Person;
 import java.util.Collections;
 import java.util.List;
 
-public class StartActivity extends AppCompatActivity implements View {
+public class StartActivity extends MvpAppCompatActivity implements MyView {
 
-    Presenter presenter;
+    @InjectPresenter
+    public Presenter presenter;
+
     MyAdapter adapter;
     Button sortButton;
     EditText searchByCharName;
@@ -30,8 +34,8 @@ public class StartActivity extends AppCompatActivity implements View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager_layout);
 
-        presenter = new Presenter();
-        presenter.setView(this);
+        // presenter = new Presenter();
+        // presenter.setView(this);
 
         sortButton = findViewById(R.id.sortButton);
         searchByCharName = findViewById(R.id.searchByCharName);
@@ -77,8 +81,18 @@ public class StartActivity extends AppCompatActivity implements View {
     }
 
     @Override
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void clearEditText() {
+        searchByCharName.setText("");
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.detachView();
+        //presenter.detachView();
     }
 }
