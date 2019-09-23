@@ -32,6 +32,18 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.10"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
+    def moxy_version = "1.7.0"
+    implementation "tech.schoolhelper:moxy-x:$moxy_version"
+    annotationProcessor "tech.schoolhelper:moxy-x-compiler:$moxy_version"
+    implementation "tech.schoolhelper:moxy-x-androidx:$moxy_version"
+    implementation "tech.schoolhelper:moxy-x-android:$moxy_version"
+
+    def dagger_version = "2.20"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
     def room_version = "2.1.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
