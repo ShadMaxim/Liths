@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.testtask'
+    namespace 'com.example.serenitysoul'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.testtask"
+        applicationId "com.example.serenitysoul"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -75,6 +75,8 @@ dependencies {
 
     // Hilt dependency injection
     implementation "com.google.dagger:hilt-android:2.44"
+    implementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:hilt-compiler:2.44'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     kapt "com.google.dagger:hilt-android-compiler:2.44"

@@ -1,4 +1,4 @@
-package com.example.testtask.navigation
+package com.example.serenitysoul.navigation
 
 import androidx.navigation.NavController
 

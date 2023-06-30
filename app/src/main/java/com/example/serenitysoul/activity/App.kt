@@ -1,4 +1,4 @@
-package com.example.testtask.activity
+package com.example.serenitysoul.activity
 
 import android.app.Application
 

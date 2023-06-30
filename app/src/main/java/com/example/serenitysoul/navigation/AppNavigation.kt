@@ -1,4 +1,4 @@
-package com.example.testtask.navigation
+package com.example.serenitysoul.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -19,11 +19,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.testtask.R
-import com.example.testtask.screens.ActionScreen
-import com.example.testtask.screens.MainScreen
-import com.example.testtask.screens.SettingsScreen
-import com.example.testtask.screens.SplashScreen
+import com.example.serenitysoul.R
+import com.example.serenitysoul.screens.ActionScreen
+import com.example.serenitysoul.screens.MainScreen
+import com.example.serenitysoul.screens.SettingsScreen
+import com.example.serenitysoul.screens.SplashScreen
 
 @Composable
 fun AppNavigation(

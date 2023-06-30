@@ -1,5 +1,6 @@
-package com.example.testtask.screens
+package com.example.serenitysoul.screens
 
+import android.os.Bundle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,16 +14,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import com.example.testtask.R
+import com.example.serenitysoul.R
 
 @Composable
-fun MainScreen(
+fun SettingsScreen(
     textId: Int,
-    onSettingsDestination: (String) -> Unit,
-    onActionsDestination: () -> Unit,
-    onCancelButtonClicked: () -> Unit,
-    modifier: Modifier = Modifier
+    onNextButtonClicked: () -> Unit,
+    onCancelButtonClicked: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    argument: Bundle
 ) {
+    val s = argument.getString("")
     Column {
         Text(text = stringResource(id = textId))
         Row(
@@ -35,24 +37,17 @@ fun MainScreen(
         ){
             OutlinedButton(
                 modifier = Modifier.weight(1f),
-                onClick = onCancelButtonClicked) {
+                onClick = {onCancelButtonClicked.invoke("987")}
+            ) {
                 Text(stringResource(R.string.cancel))
             }
             Button(
                 modifier = Modifier.weight(1f),
                 // the button is enabled when the user makes a selection
                 //enabled = selectedValue.isNotEmpty(),
-                onClick = {onSettingsDestination.invoke("123")}
+                onClick = onNextButtonClicked
             ) {
                 Text(stringResource(R.string.next))
-            }
-            Button(
-                modifier = Modifier.weight(1f),
-                // the button is enabled when the user makes a selection
-                //enabled = selectedValue.isNotEmpty(),
-                onClick = onActionsDestination
-            ) {
-                Text(stringResource(R.string.action))
             }
         }
     }
