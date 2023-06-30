@@ -1,4 +1,4 @@
-package com.example.testtask.screens
+package com.example.serenitysoul.screens
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.testtask.R
+import com.example.serenitysoul.R
 
 @Composable
 fun SplashScreen(

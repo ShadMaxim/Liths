@@ -27,6 +27,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "testtask"
+rootProject.name = "serenitysoul"
 include ':app'
 //include ':app'

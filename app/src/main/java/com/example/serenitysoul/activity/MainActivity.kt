@@ -1,10 +1,10 @@
-package com.example.testtask.activity
+package com.example.serenitysoul.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
-import com.example.testtask.navigation.AppNavigation
+import com.example.serenitysoul.navigation.AppNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

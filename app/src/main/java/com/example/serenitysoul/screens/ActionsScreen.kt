@@ -1,4 +1,4 @@
-package com.example.testtask.screens
+package com.example.serenitysoul.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import com.example.testtask.R
+import com.example.serenitysoul.R
 
 @Composable
 fun ActionScreen(

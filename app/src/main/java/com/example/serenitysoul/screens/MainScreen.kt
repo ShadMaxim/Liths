@@ -1,6 +1,5 @@
-package com.example.testtask.screens
+package com.example.serenitysoul.screens
 
-import android.os.Bundle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,17 +13,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import com.example.testtask.R
+import com.example.serenitysoul.R
 
 @Composable
-fun SettingsScreen(
+fun MainScreen(
     textId: Int,
-    onNextButtonClicked: () -> Unit,
-    onCancelButtonClicked: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    argument: Bundle
+    onSettingsDestination: (String) -> Unit,
+    onActionsDestination: () -> Unit,
+    onCancelButtonClicked: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    val s = argument.getString("")
     Column {
         Text(text = stringResource(id = textId))
         Row(
@@ -37,17 +35,24 @@ fun SettingsScreen(
         ){
             OutlinedButton(
                 modifier = Modifier.weight(1f),
-                onClick = {onCancelButtonClicked.invoke("987")}
-            ) {
+                onClick = onCancelButtonClicked) {
                 Text(stringResource(R.string.cancel))
             }
             Button(
                 modifier = Modifier.weight(1f),
                 // the button is enabled when the user makes a selection
                 //enabled = selectedValue.isNotEmpty(),
-                onClick = onNextButtonClicked
+                onClick = {onSettingsDestination.invoke("123")}
             ) {
                 Text(stringResource(R.string.next))
+            }
+            Button(
+                modifier = Modifier.weight(1f),
+                // the button is enabled when the user makes a selection
+                //enabled = selectedValue.isNotEmpty(),
+                onClick = onActionsDestination
+            ) {
+                Text(stringResource(R.string.action))
             }
         }
     }

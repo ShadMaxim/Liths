@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.testtask'
+    namespace 'com.example.serenitysoul'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.testtask"
+        applicationId "com.example.serenitysoul"
         minSdk 24
         targetSdk 33
         versionCode 1

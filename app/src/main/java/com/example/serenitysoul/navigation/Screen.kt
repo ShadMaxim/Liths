@@ -1,7 +1,7 @@
-package com.example.testtask.navigation
+package com.example.serenitysoul.navigation
 
 import androidx.annotation.StringRes
-import com.example.testtask.R
+import com.example.serenitysoul.R
 
 sealed class Screen(
     val route: String,
