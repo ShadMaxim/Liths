@@ -1,5 +1,6 @@
 package com.example.serenitysoul.screens
 
+import android.os.Bundle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,14 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.serenitysoul.R
+import com.example.serenitysoul.navigation.Screen
 
 @Composable
-fun ActionScreen(
+fun AboutAppScreen(
     textId: Int,
-    onNextButtonClicked: () -> Unit,
-    onCancelButtonClicked: () -> Unit,
-    modifier: Modifier = Modifier
+    //onNextButtonClicked: () -> Unit,
+    onCancelButtonClicked: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
+    //val s = argument.getString("")
     Column {
         Text(text = stringResource(id = textId))
         Row(
@@ -34,7 +37,8 @@ fun ActionScreen(
         ){
             OutlinedButton(
                 modifier = Modifier.weight(1f),
-                onClick = onCancelButtonClicked) {
+                onClick = {onCancelButtonClicked.invoke("987")}
+            ) {
                 Text(stringResource(R.string.cancel))
             }
             /*Button(

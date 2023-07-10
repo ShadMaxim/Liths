@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">SereneSoul</string>
+    <!--<string name="app_name">SereneSoul</string>-->
+    <string name="flavorDev">SereneSoul-Developer</string>
+    <string name="flavorTrial">SereneSoul-Trial</string>
+    <string name="defaultName">SereneSoul</string>
     <string name="weight">Weight</string>
     <string name="growth">Growth</string>
     <string name="age">Age</string>
@@ -12,6 +15,7 @@
     <!--Screens-->
     <string name="splash">Splash</string>
     <string name="settings">Настройки</string>
+    <string name="about_app">О приложении</string>
     <string name="main">Главная</string>
     <string name="actions">Действия</string>
 

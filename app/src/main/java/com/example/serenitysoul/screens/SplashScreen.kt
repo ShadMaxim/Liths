@@ -1,13 +1,16 @@
 package com.example.serenitysoul.screens
 
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,20 +20,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.serenitysoul.R
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
     onNavigateToMain: () -> Unit = {},
     durationMillis: Int = 2000,
-    startAnimSize: Dp = 0.dp
+    //splashViewModel: SplashViewModel = hiltViewModel()
 ) {
     Surface {
         Box(
@@ -39,38 +39,41 @@ fun SplashScreen(
                 .background(Color.Red),
             contentAlignment = Alignment.Center
         ) {
-            var targetAnimSize by remember { mutableStateOf(startAnimSize) }
-            val animSize by animateDpAsState(
-                targetValue = targetAnimSize,
-                animationSpec = tween(durationMillis),
-                finishedListener = {
-                    onNavigateToMain.invoke()
-                }
+            LinearIndicator(
+                indicatorProgress = 1f,
+                onNavigateToMain = onNavigateToMain,
+                durationMillis = durationMillis
             )
-
-            var rotate by remember { mutableStateOf(0f) }
-            val rotation by animateFloatAsState(
-                targetValue = rotate,
-                animationSpec = tween(durationMillis)
-            )
-
-            var scale by remember { mutableStateOf(0f) }
-            val scaling by animateFloatAsState(
-                targetValue = scale
-            )
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(animSize)
-                    .rotate(rotation)
-                    .scale(scaling)
-            )
-            LaunchedEffect(Unit) {
-                targetAnimSize = 128.dp
-                rotate = 360f
-                scale = 3f
-            }
         }
+    }
+}
+
+@Composable
+fun LinearIndicator(
+    modifier: Modifier = Modifier,
+    indicatorProgress: Float,
+    durationMillis: Int = 2000,
+    onNavigateToMain: () -> Unit = {},
+) {
+    var progress by remember { mutableStateOf(0f) }
+    val progressAnimation by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = tween(
+            durationMillis = durationMillis,
+            easing = FastOutSlowInEasing
+        ),
+        finishedListener = {
+            onNavigateToMain.invoke()
+        }
+    )
+    LinearProgressIndicator(
+        modifier = Modifier
+            .height(20.dp)
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(20.dp)),
+        progress = progressAnimation
+    )
+    LaunchedEffect(indicatorProgress) {
+        progress = indicatorProgress
     }
 }

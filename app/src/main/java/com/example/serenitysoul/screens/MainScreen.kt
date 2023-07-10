@@ -33,18 +33,18 @@ fun MainScreen(
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
             verticalAlignment = Alignment.Bottom
         ){
-            OutlinedButton(
+            /*OutlinedButton(
                 modifier = Modifier.weight(1f),
                 onClick = onCancelButtonClicked) {
                 Text(stringResource(R.string.cancel))
-            }
+            }*/
             Button(
                 modifier = Modifier.weight(1f),
                 // the button is enabled when the user makes a selection
                 //enabled = selectedValue.isNotEmpty(),
                 onClick = {onSettingsDestination.invoke("123")}
             ) {
-                Text(stringResource(R.string.next))
+                Text(stringResource(R.string.settings))
             }
             Button(
                 modifier = Modifier.weight(1f),

@@ -20,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.serenitysoul.R
+import com.example.serenitysoul.screens.AboutAppScreen
 import com.example.serenitysoul.screens.ActionScreen
 import com.example.serenitysoul.screens.MainScreen
 import com.example.serenitysoul.screens.SettingsScreen
@@ -72,9 +73,12 @@ fun AppNavigation(
                 val argument = b.arguments
                 SettingsScreen(
                     textId = Screen.SettingsScreen.titleResId,
-                    onNextButtonClicked = {  },
+                    onNextButtonClicked = { navController.navigate(Screen.AboutAppScreen.route) },
                     onCancelButtonClicked = { str->
                         cancelAllAndNavigateToStart(navController)
+                    },
+                    onShowAboutScreen = {
+                        navController.navigate(Screen.AboutAppScreen.route)
                     },
                     argument = argument!!
                 )
@@ -93,6 +97,14 @@ fun AppNavigation(
                                 inclusive = true
                             }
                         }
+                    }
+                )
+            }
+            composable(route = Screen.AboutAppScreen.route) {
+                AboutAppScreen(
+                    textId = Screen.AboutAppScreen.titleResId,
+                    onCancelButtonClicked = {
+                        cancelAllAndNavigateToStart(navController)
                     }
                 )
             }
