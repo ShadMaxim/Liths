@@ -29,4 +29,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "serenitysoul"
 include ':app'
-//include ':app'

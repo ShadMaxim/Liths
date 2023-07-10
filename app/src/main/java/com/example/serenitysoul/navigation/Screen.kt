@@ -12,6 +12,7 @@ sealed class Screen(
     object SplashScreen : Screen("splash", R.string.splash)
     object MainScreen : Screen("main", R.string.main)
     object SettingsScreen : Screen("settings", R.string.settings)
+    object AboutAppScreen : Screen("about", R.string.about_app)
     object ActionsScreen : Screen("actions", R.string.actions)
 
     companion object {

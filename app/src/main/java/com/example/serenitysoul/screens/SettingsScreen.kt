@@ -21,6 +21,7 @@ fun SettingsScreen(
     textId: Int,
     onNextButtonClicked: () -> Unit,
     onCancelButtonClicked: (String) -> Unit,
+    onShowAboutScreen: () -> Unit,
     modifier: Modifier = Modifier,
     argument: Bundle
 ) {
@@ -47,7 +48,7 @@ fun SettingsScreen(
                 //enabled = selectedValue.isNotEmpty(),
                 onClick = onNextButtonClicked
             ) {
-                Text(stringResource(R.string.next))
+                Text(stringResource(R.string.about_app))
             }
         }
     }
