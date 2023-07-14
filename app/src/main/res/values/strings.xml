@@ -11,6 +11,7 @@
     <string name="cancel">Cancel</string>
     <string name="next">Next</string>
     <string name="action">Action</string>
+    <string name="show_list">OpenBS</string>
 
     <!--Screens-->
     <string name="splash">Splash</string>

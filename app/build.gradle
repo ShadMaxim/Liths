@@ -129,6 +129,9 @@ dependencies {
     implementation "androidx.compose.material3:material3:1.1.0"
     implementation "androidx.compose.material3:material3-window-size-class:1.1.0"
 
+    //splash
+    implementation "androidx.core:core-splashscreen:1.0.0-rc01"
+
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.21"

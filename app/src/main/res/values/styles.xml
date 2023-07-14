@@ -1,11 +1,23 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor" tools:targetApi="s">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor" tools:targetApi="s">?attr/colorPrimaryVariant</item>
+    </style>
+    <style name="SplashLauncherTheme" parent="Theme.SplashScreen">
+        <item name="android:windowBackground">@mipmap/ic_launcher_app</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/colorPrimaryDark</item>
+        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="s">@color/colorPrimaryDark</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor" tools:targetApi="s">?attr/colorPrimaryVariant</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 
 </resources>
