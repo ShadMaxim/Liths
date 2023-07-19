@@ -105,7 +105,8 @@ fun LinearIndicator(
             .height(20.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp)),
-        progress = progressAnimation
+        progress = progressAnimation,
+        trackColor = Color.Transparent
     )
     LaunchedEffect(indicatorProgress) {
         progress = indicatorProgress

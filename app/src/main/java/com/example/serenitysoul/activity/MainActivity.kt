@@ -7,6 +7,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.serenitysoul.navigation.AppNavigation
+import com.example.serenitysoul.theme.SerenitySoulTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +15,9 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         //hideSystemUI()
         setContent {
-            AppNavigation()
+            SerenitySoulTheme {
+                AppNavigation()
+            }
         }
     }
 

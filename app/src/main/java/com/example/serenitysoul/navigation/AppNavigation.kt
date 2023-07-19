@@ -47,6 +47,7 @@ import com.example.serenitysoul.screens.ActionScreen
 import com.example.serenitysoul.screens.MainScreen
 import com.example.serenitysoul.screens.SettingsScreen
 import com.example.serenitysoul.screens.SplashScreen
+import com.example.serenitysoul.theme.SerenitySoulTheme
 
 @Composable
 fun AppNavigation(
@@ -98,44 +99,51 @@ fun AppNavigation(
                 val showCardInfoState = remember {
                     mutableStateOf(false)
                 }
-                    SettingsScreen(
-                        textId = Screen.SettingsScreen.titleResId,
-                        onNextButtonClicked = { navController.navigate(Screen.AboutAppScreen.route) },
-                        onCancelButtonClicked = { str ->
-                            cancelAllAndNavigateToStart(navController)
-                        },
-                        onShowAboutScreen = {
-                            navController.navigate(Screen.AboutAppScreen.route)
-                        },
-                        argument = argument!!,
-                        showState = showCardInfoState,
-                        dragHandle = { Text(text = "1234") },
-                        content = {
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(text = "999999999")
-                        }
-                    )
+                SettingsScreen(
+                    textId = Screen.SettingsScreen.titleResId,
+                    onNextButtonClicked = { navController.navigate(Screen.AboutAppScreen.route) },
+                    onCancelButtonClicked = { str ->
+                        cancelAllAndNavigateToStart(navController)
+                    },
+                    onShowAboutScreen = {
+                        navController.navigate(Screen.AboutAppScreen.route)
+                    },
+                    argument = argument!!,
+                    showState = showCardInfoState,
+                    dragHandle = {
+                        Text(
+                            text = "1234",
+                            style = SerenitySoulTheme.typography.Bold_24.copy(
+                                color = SerenitySoulTheme.colorScheme.green
+                            )
+                        )
+                    },
+                    content = {
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Text(text = "999999999")
+                    }
+                )
                 //}
                 /*SettingsScreen(
                     textId = Screen.SettingsScreen.titleResId,

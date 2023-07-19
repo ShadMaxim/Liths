@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!--<string name="app_name">SereneSoul</string>-->
     <string name="flavorDev">SereneSoul-Developer</string>
@@ -14,16 +15,15 @@
     <string name="show_list">OpenBS</string>
 
     <!--Url-->
-    <string name="landing_url"> Visit us at <xliff:g id="application_homepage">https://xyz.com/</xliff:g> to know more.</string>
+    <string name="landing_url"> Наведайце гэты сайт <xliff:g id="application_homepage">https://xyz.com/</xliff:g> каб даведацца больш.</string>
 
     <!--Screens-->
     <string name="splash">Splash</string>
-    <string name="settings">Настройки</string>
-    <string name="about_app">О приложении</string>
-    <string name="main">Главная</string>
-    <string name="actions">Действия</string>
+    <string name="settings">Settings</string>
+    <string name="about_app">About app</string>
+    <string name="main">Main</string>
+    <string name="actions">Actions</string>
 
     <!--ContentDescription-->
     <string name="back_button">Back</string>
-
 </resources>
