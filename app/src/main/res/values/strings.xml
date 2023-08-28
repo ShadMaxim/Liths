@@ -26,4 +26,6 @@
     <!--ContentDescription-->
     <string name="back_button">Back</string>
 
+    <string name="clipboard">Скопировано в буфер обмена</string>
+
 </resources>

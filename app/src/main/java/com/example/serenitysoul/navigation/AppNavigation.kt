@@ -1,5 +1,6 @@
 package com.example.serenitysoul.navigation
 
+import android.Manifest
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.expandVertically
@@ -10,6 +11,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +21,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +35,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,6 +52,9 @@ import com.example.serenitysoul.screens.MainScreen
 import com.example.serenitysoul.screens.SettingsScreen
 import com.example.serenitysoul.screens.SplashScreen
 import com.example.serenitysoul.theme.SerenitySoulTheme
+import com.example.serenitysoul.utils.Utils
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
 @Composable
 fun AppNavigation(
@@ -59,16 +66,15 @@ fun AppNavigation(
         route = backStackEntry?.destination?.route ?: Screen.SplashScreen.route
     )
 
-    Scaffold(
-        //можно вернуть, но надо разобраться с отступами верхними
-        /*topBar = {
-            AppBar(
-                selectedScreen = currentScreen,
-                canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = { navController.navigateUp() }
-            )
-        }*/
-    ) { innerPadding ->
+    Scaffold { innerPadding ->
+        /*AppBar(
+            selectedScreen = currentScreen,
+            canNavigateBack = navController.previousBackStackEntry != null,
+            navigateUp = { navController.navigateUp() }
+        )*/
+        PermissionInformationAppBar(
+            selectedScreen = currentScreen,
+        )
 
         val inP = innerPadding
 
@@ -144,18 +150,6 @@ fun AppNavigation(
                         Text(text = "999999999")
                     }
                 )
-                //}
-                /*SettingsScreen(
-                    textId = Screen.SettingsScreen.titleResId,
-                    onNextButtonClicked = { navController.navigate(Screen.AboutAppScreen.route) },
-                    onCancelButtonClicked = { str ->
-                        cancelAllAndNavigateToStart(navController)
-                    },
-                    onShowAboutScreen = {
-                        navController.navigate(Screen.AboutAppScreen.route)
-                    },
-                    argument = argument!!
-                )*/
             }
             composable(route = Screen.ActionsScreen.route) {
                 ActionScreen(
@@ -178,7 +172,8 @@ fun AppNavigation(
                 AboutAppScreen(
                     textId = Screen.AboutAppScreen.titleResId,
                     onCancelButtonClicked = {
-                        cancelAllAndNavigateToStart(navController)
+                        //cancelAllAndNavigateToStart(navController)
+                        navController.navigateUp()
                     }
                 )
             }
@@ -217,6 +212,7 @@ fun AppBar(
     )
 }*/
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun AppBar(
     selectedScreen: Screen,
@@ -224,7 +220,43 @@ fun AppBar(
     modifier: Modifier = Modifier,
     navigateUp: () -> Unit = {},
 ) {
-    val heightTopBar = if (selectedScreen == Screen.SplashScreen) 0.dp else 10.dp
+
+    val permissionStates = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+    )
+
+    var h = 30.dp
+
+    if (permissionStates.allPermissionsGranted) {
+        Text("Camera and Read storage permissions Granted! Thank you!")
+    } else {
+        h= 30.dp
+        Column(
+            modifier = Modifier.background(color = SerenitySoulTheme.colorScheme.red)
+        ) {
+            Text(
+                Utils.getTextToShowGivenPermissions(
+                    permissionStates.revokedPermissions,
+                    permissionStates.shouldShowRationale
+                )
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = { permissionStates.launchMultiplePermissionRequest() }) {
+                Text("Request permissions")
+            }
+        }
+    }
+
+    //val heightTopBar = if (selectedScreen == Screen.SplashScreen) 0.dp else 10.dp
+    val heightTopBar =
+        when {
+            selectedScreen == Screen.SplashScreen -> 0.dp
+            permissionStates.allPermissionsGranted -> 10.dp
+            else -> {50.dp}
+        }
+    //val heightTopBar = h
 
     TopAppBar(
         title = {
@@ -264,6 +296,41 @@ fun AppBar(
             }
         }
     )
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun PermissionInformationAppBar(
+    selectedScreen: Screen,
+    /*modifier: Modifier = Modifier,
+    navigateUp: () -> Unit = {},*/
+) {
+
+    val permissionStates = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+    )
+
+    if (permissionStates.allPermissionsGranted) {
+        Text("Camera and Read storage permissions Granted! Thank you!")
+    } else if (selectedScreen != Screen.SplashScreen) {
+
+        Column(
+            modifier = Modifier.background(color = SerenitySoulTheme.colorScheme.red)
+        ) {
+            Text(
+                Utils.getTextToShowGivenPermissions(
+                    permissionStates.revokedPermissions,
+                    permissionStates.shouldShowRationale
+                )
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = { permissionStates.launchMultiplePermissionRequest() }) {
+                Text("Request permissions")
+            }
+        }
+    }
 }
 
 private fun cancelAllAndNavigateToStart(

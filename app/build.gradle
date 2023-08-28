@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -21,7 +23,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        manifestPlaceholders = [appLabel:"@string/defaultName"]
+        manifestPlaceholders = [appLabel: "@string/defaultName"]
         //manifestPlaceholders = [appIcon:"@mipmap/ic_launcher"]
     }
 
@@ -62,7 +64,7 @@ android {
         flavorDev {
             applicationId = "com.example.serenitysoul"
             buildConfigField "boolean", "useTrialVersion", "false"
-            manifestPlaceholders = [appLabel:"@string/flavorDev"]
+            manifestPlaceholders = [appLabel: "@string/flavorDev"]
             //manifestPlaceholders = [appIcon:"@mipmap/ic_launcher_app"]
 
             //buildConfigField
@@ -76,7 +78,7 @@ android {
         flavorTrial {
             applicationId = "com.example.serenitysoultrial"
             buildConfigField "boolean", "useTrialVersion", "true"
-            manifestPlaceholders = [appLabel:"@string/flavorTrial"]
+            manifestPlaceholders = [appLabel: "@string/flavorTrial"]
             //manifestPlaceholders = [appIcon:"@mipmap/ic_launcher"]
 
             //buildConfigField
@@ -86,6 +88,12 @@ android {
             versionName = "2.0"
             dimension = "version"*/
             dimension "default"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "serenitysoul_${buildTime()}_${variant.name}_${variant.versionName}_(${variant.versionCode}).apk"
         }
     }
 }
@@ -132,68 +140,25 @@ dependencies {
     //splash
     implementation "androidx.core:core-splashscreen:1.0.0-rc01"
 
+    //timber (logs)
+    implementation "com.jakewharton.timber:timber:5.0.1"
+
+    //permissions
+    //implementation "com.google.accompanist:permissions:0.18.0"
+    implementation "com.google.accompanist:accompanist-permissions:0.31.5-beta"
+
+    //datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //Animation
+    //implementation "androidx.compose.animation:animation:1.6.0-alpha03"
+
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.21"
 }
 
-/*
-apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.kotlin.android'
-
-android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.1"
-    defaultConfig {
-        applicationId "com.example.testtask"
-        minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
+static def buildTime() {
+    def df = new SimpleDateFormat("dd-MM-yyyy_HH-mm")
+    return df.format(new Date())
 }
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-
-    implementation "io.reactivex.rxjava2:rxjava:2.2.10"
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-    implementation 'androidx.core:core-ktx:+'
-
-    def moxy_version = "1.7.0"
-    implementation "tech.schoolhelper:moxy-x:$moxy_version"
-    annotationProcessor "tech.schoolhelper:moxy-x-compiler:$moxy_version"
-    implementation "tech.schoolhelper:moxy-x-androidx:$moxy_version"
-    implementation "tech.schoolhelper:moxy-x-android:$moxy_version"
-
-    def dagger_version = "2.20"
-    implementation "com.google.dagger:dagger-android:$dagger_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
-
-    def room_version = "2.1.0"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
-    implementation "android.arch.persistence.room:rxjava2:1.1.1"
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-}
-*/
