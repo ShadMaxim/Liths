@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.serenitysoul">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name="com.example.serenitysoul.activity.App"
         android:allowBackup="true"
@@ -13,6 +16,7 @@
 
         <activity
             android:name="com.example.serenitysoul.activity.MainActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,3 +30,4 @@
 
     <!--android:icon="${appIcon}"-->
     <!--android:icon="@mipmap/ic_launcher_app"-->
+<!--    android:theme="@style/SplashLauncherTheme"-->

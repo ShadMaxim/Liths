@@ -5,8 +5,13 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.serenitysoul.navigation.Screen
+import com.example.serenitysoul.usecases.BaseUseCase
+import javax.inject.Inject
 
-abstract class BaseViewModel<StateView> : ViewModel() {
+abstract class  BaseViewModel<StateView, UseCase : BaseUseCase<*,*>> : ViewModel() {
+
+    @Inject
+    lateinit var useCase: UseCase
 
     //protected val uiState: MutableState<String> = mutableStateOf("Default")
 

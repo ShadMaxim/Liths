@@ -4,26 +4,39 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import com.example.serenitysoul.R
 
 @Composable
 fun SplashScreen(
@@ -35,14 +48,35 @@ fun SplashScreen(
     Surface {
         Box(
             modifier = modifier
-                .fillMaxSize()
-                .background(Color.Red),
+                .fillMaxSize(),
+            //.background(Color.Red),
             contentAlignment = Alignment.Center
         ) {
+            Image(
+                painter = painterResource(R.drawable.ic_icon_start_screen),
+                contentDescription = "fon for splash screen",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .paint(
+                        painter = painterResource(R.drawable.ic_fon_splash),
+                        contentScale = ContentScale.FillBounds
+                    )
+            )
+            Image(
+                painter = painterResource(R.drawable.ic_fast_dream_title),
+                contentDescription = "fon for splash screen",
+                modifier = Modifier
+                    .wrapContentHeight()
+            )
             LinearIndicator(
                 indicatorProgress = 1f,
                 onNavigateToMain = onNavigateToMain,
-                durationMillis = durationMillis
+                durationMillis = durationMillis,
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+                    .align(
+                        alignment = Alignment.BottomCenter
+                    )
             )
         }
     }
@@ -55,7 +89,7 @@ fun LinearIndicator(
     durationMillis: Int = 2000,
     onNavigateToMain: () -> Unit = {},
 ) {
-    var progress by remember { mutableStateOf(0f) }
+    var progress by remember { mutableFloatStateOf(0f) }
     val progressAnimation by animateFloatAsState(
         targetValue = progress,
         animationSpec = tween(
@@ -67,13 +101,29 @@ fun LinearIndicator(
         }
     )
     LinearProgressIndicator(
-        modifier = Modifier
+        modifier = modifier
+            .padding(bottom = 50.dp)
             .height(20.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp)),
-        progress = progressAnimation
+        progress = progressAnimation,
+        trackColor = Color.Transparent
     )
     LaunchedEffect(indicatorProgress) {
         progress = indicatorProgress
     }
+}
+
+/*private fun hideSystemUI() {
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+    WindowCompat.getInsetsController(window, window.decorView).apply {
+        this?.hide(WindowInsetsCompat.Type.systemBars())
+        this?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+}*/
+
+@Preview(showBackground = true, backgroundColor = 0xFF606981)
+@Composable
+fun previewSplashScreen() {
+    SplashScreen()
 }
