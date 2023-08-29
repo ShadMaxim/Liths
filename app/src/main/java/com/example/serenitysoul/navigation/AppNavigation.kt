@@ -1,8 +1,10 @@
 package com.example.serenitysoul.navigation
 
 import android.Manifest
+import androidx.compose.animation.Animatable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -29,13 +31,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,6 +54,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.serenitysoul.R
+import com.example.serenitysoul.components.getTopBar
 import com.example.serenitysoul.screens.AboutAppScreen
 import com.example.serenitysoul.screens.ActionScreen
 import com.example.serenitysoul.screens.MainScreen
@@ -66,22 +75,56 @@ fun AppNavigation(
         route = backStackEntry?.destination?.route ?: Screen.SplashScreen.route
     )
 
-    Scaffold { innerPadding ->
+    val scrollTopBarBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState()
+    )
+    val topBar = remember { mutableStateOf<@Composable () -> Unit>(@Composable {}) }
+
+    topBar.value = getTopBar(
+        currentRoute = currentScreen,
+        scrollTopBarBehavior = scrollTopBarBehavior/*,
+        navController = navController,
+        modifier = modifier,
+        title = topBarTitle.value,
+        scrollTopBarBehavior = scrollTopBarBehavior,
+        onNavigateToProfile = {},
+        onNavigateToSettings = {}*/
+    )
+
+    Scaffold(
+        topBar = {
+            topBar.value.invoke()
+        }
+    ) { innerPadding ->
         /*AppBar(
             selectedScreen = currentScreen,
             canNavigateBack = navController.previousBackStackEntry != null,
             navigateUp = { navController.navigateUp() }
         )*/
-        PermissionInformationAppBar(
+        /*PermissionInformationAppBar(
             selectedScreen = currentScreen,
-        )
+        )*/
+
 
         val inP = innerPadding
+
+        /*val color = remember { Animatable(Color.Gray) }
+        LaunchedEffect(Unit) {
+            color.animateTo(Color.Red, animationSpec = tween(1000))
+            color.animateTo(Color.Gray, animationSpec = tween(1000))
+        }*/
+
 
         NavHost(
             navController = navController,
             startDestination = Screen.SplashScreen.route,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                /*.paint(
+                    painter = painterResource(id = R.drawable.ic_back_start_screen),
+                    contentScale = ContentScale.FillBounds
+                )*/
+                //.background(color = color.value)
         ) {
             composable(route = Screen.MainScreen.route) {
                 MainScreen(
@@ -319,6 +362,7 @@ fun PermissionInformationAppBar(
         Column(
             modifier = Modifier.background(color = SerenitySoulTheme.colorScheme.red)
         ) {
+            Spacer(modifier = Modifier.height(32.dp))
             Text(
                 Utils.getTextToShowGivenPermissions(
                     permissionStates.revokedPermissions,

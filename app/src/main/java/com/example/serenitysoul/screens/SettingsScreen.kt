@@ -49,6 +49,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.serenitysoul.R
 import com.example.serenitysoul.navigation.Screen
+import com.example.serenitysoul.theme.SerenitySoulTheme
 import com.example.serenitysoul.utils.helpers.PreferencesDataStoreHelper
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import kotlinx.coroutines.flow.collect
@@ -104,7 +105,10 @@ fun SettingsScreen(
             Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.systemBars))
         }
     }
-    Column {
+    Column(
+        modifier = Modifier
+            .background(color = SerenitySoulTheme.colorScheme.settingsBackgroundColor)
+    ) {
         //Spacer(modifier = Modifier.size(20.dp))
         Text(text = stringResource(id = textId))
         Button(

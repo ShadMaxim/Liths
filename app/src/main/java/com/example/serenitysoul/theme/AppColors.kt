@@ -17,6 +17,7 @@ val neutralWhiteContent = Color(0xFFFFFFFF)
 val neutralBlackContent = Color(0xFF27292D)
 
 //for Light color scheme
+val lightSettingsBackgroundColor = Color(0xFF1E5FA3)
 val lightBluePrimary = Color(0xFF276BF6)
 val lightBlueSecondary = Color(0xFFEFF4FE)
 val lightBlueGrey = Color(0xFF606981)
@@ -27,6 +28,7 @@ val lightScrim = Color(0x4D04040F)
 val lightPrimaryContent = Color(0xFF27292D)
 
 //for Dark color scheme
+val darkSettingsBackgroundColor = Color(0xFF1E5FA3)
 val darkBluePrimary = Color(0xFF4672F3)
 val darkBlueSecondary = Color(0xFF343B46)
 val darkBlueGrey = Color(0xFFA4A9B6)
